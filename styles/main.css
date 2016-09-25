@@ -11,7 +11,8 @@ body {
 #experimentoCant {
   display: inline-block;
   width: 100%;
-  max-width: 500px; }
+  max-width: 500px;
+  float: left; }
 
 #calcularFrecuenciabtn {
   display: inline-block;

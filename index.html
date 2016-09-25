@@ -2,7 +2,7 @@
 <html ng-app="tallerDadoApp">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Trabajo Dado - Daniel Gallego</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -25,21 +25,22 @@
     <![endif]-->
 
     <div ng-controller="MainCtrl" class="chartContainer center">
-      <h3>Taller Dado</h3>
+      <h3>Trabajo Dado</h3>
       <h5>Teoría Frecuentista de la Probabilidad</h5>
       <p class="flow-text">Ingresa la cantidad de veces que se lanzará el dado y luego dá click en el botón "Calcular" para simular el lanzamiento de un dado el número de veces que se ingresó.</p>
       <div class="divider"></div>
 
       <br>
       <br>
-
-      <input type="number" name="expermientoCant" id="experimentoCant" placeholder="Ingrese las veces que se lanzará el dado" ng-model="experimentoCant" />
-      
-      <a class="waves-effect waves-light btn" id="calcularFrecuenciabtn" ng-click="frecuenciaCaras()">Calcular</a>
+      <div class="input-field col s12">
+        <input type="number" name="expermientoCant" id="experimentoCant" ng-model="experimentoCant" />
+        <label for="experimentoCant">Ingrese las veces que se lanzará el dado</label>
+      </div>
+      <a class="waves-effect waves-light btn blue darken-1" id="calcularFrecuenciabtn" ng-click="frecuenciaCaras()">Calcular</a>
 
       <canvas id="bar" class="chart chart-bar"
       chart-data="data" chart-labels="labels" 
-      chart-series="series">
+      chart-series="series" chart-colors = "colors">
       </canvas>      
       <br>
 
@@ -53,7 +54,7 @@
         </thead>
 
         <tbody>                 
-          <tr data-ng-repeat="cara in data track by $index">          
+          <tr data-ng-repeat="cara in arregloData track by $index">          
             <td>Cara {{$index+1}}</td>
             <td>{{cara}}</td>  
             <td>{{(cara/experimentoCant) | filtroPorcentaje: 2}}</td>                      
