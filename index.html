@@ -1,0 +1,82 @@
+<!doctype html>
+<html ng-app="tallerDadoApp">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Compiled and minified Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>   
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <!-- Compiled and minified Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+    <script src="./scripts/chartjs/node_modules/chart.js/dist/Chart.js"></script>
+    <script src="./scripts/angular-chart/angular-chart.js"></script> 
+    
+  </head>
+  <body>
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div ng-controller="MainCtrl" class="chartContainer center">
+      <h3>Taller Dado</h3>
+      <h5>Teoría Frecuentista de la Probabilidad</h5>
+      <p class="flow-text">Ingresa la cantidad de veces que se lanzará el dado y luego dá click en el botón "Calcular" para simular el lanzamiento de un dado el número de veces que se ingresó.</p>
+      <div class="divider"></div>
+
+      <br>
+      <br>
+
+      <input type="number" name="expermientoCant" id="experimentoCant" placeholder="Ingrese las veces que se lanzará el dado" ng-model="experimentoCant" />
+      
+      <a class="waves-effect waves-light btn" id="calcularFrecuenciabtn" ng-click="frecuenciaCaras()">Calcular</a>
+
+      <canvas id="bar" class="chart chart-bar"
+      chart-data="data" chart-labels="labels" 
+      chart-series="series">
+      </canvas>      
+      <br>
+
+      <table id="tablaFrecuenciaSimple" class="striped centered">
+        <thead>
+          <tr>
+              <th data-field="id">Caras</th>
+              <th data-field="fi">Frecuencia Absoluta</th>
+              <th data-field="probabilidad">Probabilidad</th>
+          </tr>
+        </thead>
+
+        <tbody>                 
+          <tr data-ng-repeat="cara in data track by $index">          
+            <td>Cara {{$index+1}}</td>
+            <td>{{cara}}</td>  
+            <td>{{(cara/experimentoCant) | filtroPorcentaje: 2}}</td>                      
+          </tr>                  
+        </tbody>
+      </table> 
+      <div class="divider"></div>     
+      <span class="right">Hecho por: Daniel Esteban Gallego Sierra</span>
+
+    </div>
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>    
+    <script src="scripts/services/calcularfrecuencia.js"></script>
+
+    <script type="text/javascript">
+      $('#calcularFrecuenciabtn').click(function(){
+        $('#tablaFrecuenciaSimple').css('display','table');  
+      })
+      
+    </script>
+    <script src="scripts/filters/filtroporcentaje.js"></script>
+    <!-- endbuild -->
+</body>
+</html>
